@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LeanplumRepositoryAnalyticsProtocol {
+public protocol LeanplumRepositoryAnalyticsProtocol {
     func trackScreen(name: String, parameters: [String: Any])
     
     func trackEvent(event: String, parameters: [String: Any])
@@ -15,21 +15,23 @@ protocol LeanplumRepositoryAnalyticsProtocol {
     func setUserID(userId: String)
 }
 
-class LeanplumRepositoryAnalytics: LeanplumRepositoryAnalyticsProtocol {
-    func trackScreen(name: String, parameters: [String: Any]) {
-        var params = parameters
+public class LeanplumRepositoryAnalytics: LeanplumRepositoryAnalyticsProtocol {
+    public init() {}
+    
+    public func trackScreen(name: String, parameters: [String: Any]) {
+        let params = parameters
         //        params[AnalyticsParameterScreenName] = name
         //        trackEvent(event: AnalyticsEventScreenView, parameters: params)
         print("\(name) \(params)")
     }
     
-    func trackEvent(event: String, parameters: [String: Any]) {
+    public func trackEvent(event: String, parameters: [String: Any]) {
         //        Analytics.logEvent(event, parameters: parameters)
         print("\(event) \(parameters)")
         
     }
     
-    func setUserID(userId: String) {
+    public func setUserID(userId: String) {
         //        Analytics.setUserID(userId)
         print("\(userId)")
         

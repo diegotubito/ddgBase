@@ -1,21 +1,21 @@
 import UIKit
 
-public class BaseViewController<TAnalytic>: UIViewController where TAnalytic: BaseAnalyticsProtocol {
-    var analytics: TAnalytic!
+open class BaseViewController<TAnalytic>: UIViewController where TAnalytic: BaseAnalyticsProtocol {
+    open var analytics: TAnalytic!
     
-    var analyticPlatform: AnalyticPlatforms {
+    open var analyticPlatform: AnalyticPlatforms {
         return AnalyticPlatforms.All
     }
     
-    var identifier: String {
+    public var identifier: String {
         return String(describing: type(of: self))
     }
     
-    internal func analyticsInit() {
+    open func analyticsInit() {
         fatalError("analitycs need to be initialized at \(identifier)")
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super .viewDidLoad()
         analyticsInit()
         trackScreen()
@@ -47,26 +47,4 @@ extension BaseViewController {
     private func leanplumScreenTrack() {
         analytics.leanplumTrackScreen(name: "leanplumScreen", parameters: ["name": identifier])
     }
-}
-
-public protocol Coordinator {
-    var children: [Coordinator]? { get set }
-    var navigationController: UINavigationController { get set }
-    
-    func start()
-}
-
-
-protocol Storyboarded {
-    static func instatiate(name: String) -> Self
-}
-
-extension Storyboarded where Self: UIViewController {
-    static func instatiate(name: String) -> Self {
-        let storyboard = UIStoryboard(name: name, bundle: Bundle.main)
-        let identifier = String(describing: self)
-        let vc = storyboard.instantiateViewController(withIdentifier: identifier) as? Self
-        return vc!
-    }
-    
 }

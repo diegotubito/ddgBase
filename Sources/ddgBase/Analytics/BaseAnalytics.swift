@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AnalyticPlatforms {
+public enum AnalyticPlatforms {
     case Firebase
     case Leanplum
     case All
@@ -25,11 +25,11 @@ public protocol BaseAnalyticsProtocol {
     func leanplumSetUserID(userId: String)
 }
 
-public class BaseAnalytics: BaseAnalyticsProtocol {
-    var firebaseRepositoryAnalytics: FirebaseRepositoryAnalyticsProtocol
-    var leanplumRepositoryAnalytics: LeanplumRepositoryAnalyticsProtocol
+open class BaseAnalytics: BaseAnalyticsProtocol {
+    public var firebaseRepositoryAnalytics: FirebaseRepositoryAnalyticsProtocol
+    public var leanplumRepositoryAnalytics: LeanplumRepositoryAnalyticsProtocol
     
-    init(firebaseAnalytics: FirebaseRepositoryAnalyticsProtocol = FirebaseRepositoryAnalytics(),
+    public init(firebaseAnalytics: FirebaseRepositoryAnalyticsProtocol = FirebaseRepositoryAnalytics(),
          leanplumAnalytics: LeanplumRepositoryAnalyticsProtocol = LeanplumRepositoryAnalytics()) {
         self.firebaseRepositoryAnalytics = firebaseAnalytics
         self.leanplumRepositoryAnalytics = leanplumAnalytics
